@@ -26,7 +26,6 @@ export const links: LinksFunction = () => [
 export const action = async () => {
   const contact = await createEmptyContact();
   const create = await createData(contact);
-  console.log(create);
   return redirect(`/contacts/${contact.id}/edit`);
 };
 
@@ -35,10 +34,7 @@ export const loader = async ({
 }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const q = url.searchParams.get("q");
-  // const contacts = await getContacts(q);
   const contacts = await getAllData();
-  console.log(contacts);
-  
   return json({ contacts, q });
 };
 

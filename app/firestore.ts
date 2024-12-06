@@ -55,7 +55,7 @@ export async function getAllData():Promise<ContactRecord[]> {
 export async function getSingleData(id:string): Promise<ContactRecord | null> {
     
     // find
-    const find = await getData("id",id);
+    const find = await findData("id",id);
 
     // get data
     const docRef = doc(db, "member", find);
@@ -97,7 +97,7 @@ export async function updateData(id:string,values:ContactMutation)
 {
 
     // find from id
-    const find = await getData("id",id);
+    const find = await findData("id",id);
 
     // Update document
     const dataUpload = {...values}
@@ -108,14 +108,14 @@ export async function updateData(id:string,values:ContactMutation)
 export async function deleteData(id:string) {
 
     // find id
-    const find = await getData("id",id);
+    const find = await findData("id",id);
 
     // delete doc
     const del = await deleteDoc(doc(db,"member",find));
     
 }
 
-async function getData(target:string,values:any) {
+async function findData(target:string,values:any) {
     
     // find
     const documentRef = collection(db,"member");
